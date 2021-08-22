@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render # We must use this function to render
 from django.http import HttpResponse # Import library
 
 # Create your views here.
@@ -6,10 +6,10 @@ from django.http import HttpResponse # Import library
 ## Create functions in the view's file
 
 def home(request):
-    return HttpResponse('home')
+    return render(request, 'accounts/dashboard.html') # First render
 
 def products(request):
-    return HttpResponse('products')
+    return render(request, 'accounts/products.html') # First render
 
 def customer(request):
-    return HttpResponse('customer')
+    return render(request, 'accounts/customers.html') # First render
