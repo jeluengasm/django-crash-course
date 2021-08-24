@@ -6,4 +6,5 @@ from .models import * # We must import this table created and migrated from "mod
 
 admin.site.register(Customer)
 admin.site.register(Product)
+admin.site.register(Tag)
 admin.site.register(Order)
