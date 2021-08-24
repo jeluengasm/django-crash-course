@@ -6,5 +6,5 @@ from . import views # Import the "views.py" file
 urlpatterns = [
     path('', views.home), # Write as a signal, no as a function or method!!!
     path('products/',views.products),
-    path('customer/',views.customer)
+    path('customer/<str:pk_test>',views.customer)
 ]
