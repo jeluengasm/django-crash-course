@@ -33,14 +33,21 @@ class Product(models.Model):
         return self.name
     
 class Order(models.Model):
-    
-	STATUS = (
+
+    STATUS = (
 			('Pending', 'Pending'),
 			('Out for delivery', 'Out for delivery'),
 			('Delivered', 'Delivered'),
 			)
- 
-	customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL) # models.CASCADE to do a cascade delete
-	product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL) # models.CASCADE to do a cascade delete
-	date_created = models.DateTimeField(auto_now_add=True, null=True)
-	status = models.CharField(max_length=200, null=True, choices=STATUS)
+
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.SET_NULL) # models.CASCADE to do a cascade delete
+    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL) # models.CASCADE to do a cascade delete
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
+
+    def __str__(self):
+        return self.product.name
+    
+
+
+
