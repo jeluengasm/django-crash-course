@@ -1,16 +1,28 @@
 from django.shortcuts import render,redirect # We must use this function to render
 from django.http import HttpResponse # Import library
 from django.forms import inlineformset_factory
+from django.contrib.auth.forms import UserCreationForm
+
 from .models import *
 from .forms import OrderForm
 from .filters import OrderFilter
 
-# Create your views here.
+def registerPage(request):
+    form = UserCreationForm()
+    
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {'form':form}
+    return render(request,'accounts/register.html', context)
 
-## Create functions in the view's file
+def loginPage(request):
+    context = {}
+    return render(request,'accounts/login.html', context)
 
 def home(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all() #.order_by('-id')[:5]
     customers = Customer.objects.all()
     
     total_customers = customers.count()
@@ -18,7 +30,7 @@ def home(request):
     
     delivered = orders.filter(status='Delivered').count()
     pending = orders.filter(status='Pending').count()
-    
+    orders = orders.order_by('-date_created')[:5]
     context = {'orders': orders, 'customers': customers,
                'total_customers': total_customers, 'total_orders': total_orders,
                'delivered': delivered, 'pending': pending}

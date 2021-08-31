@@ -13,10 +13,9 @@
             {{ form }}
             <hr>
           {% endfor %}
-        {% else %}
+        {% elif form %}
           {{ form }}
         {% endif %}
-        
           <input type="submit" name="Submit" value="Submit">
       </form>
 		</div>
